@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -44,9 +45,16 @@ public class HomeImagesListRecyclerAdapter extends RecyclerView.Adapter<HomeImag
     public void onBindViewHolder(@NonNull HomeImagesListItemViewHolder holder, int position) {
         holder.binding.txtTitle.setText(imagesList.get(position).title);
         holder.binding.txtCenterDate.setText(context.getString(R.string.home_list_item_center_date_placeholder, imagesList.get(position).center, imagesList.get(position).date));
+
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(context);
+        circularProgressDrawable.setCenterRadius(context.getResources().getInteger(R.integer.circular_progress_center_radius));
+        circularProgressDrawable.setStrokeWidth(context.getResources().getInteger(R.integer.circular_progress_stroke_width));
+        circularProgressDrawable.start();
+
         Glide.with(context)
                 .load(imagesList.get(position).image)
                 .apply(RequestOptions.centerCropTransform())
+                .placeholder(circularProgressDrawable)
                 .into(holder.binding.milkyWayImage);
 
     }

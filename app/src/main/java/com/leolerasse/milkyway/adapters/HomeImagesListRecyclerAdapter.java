@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.leolerasse.milkyway.databinding.HomeImageListItemBinding;
+import com.leolerasse.milkyway.models.MilkyWayImageModel;
 import com.leolerasse.milkyway.network.models.APIResponse;
 import com.leolerasse.milkyway.network.models.Collection;
 import com.leolerasse.milkyway.network.models.Item;
@@ -20,14 +21,14 @@ import java.util.List;
 public class HomeImagesListRecyclerAdapter extends RecyclerView.Adapter<HomeImagesListRecyclerAdapter.HomeImagesListItemViewHolder> {
 
     private Context context;
-    private List<Item> imagesList;
+    private List<MilkyWayImageModel> imagesList;
 
-    public HomeImagesListRecyclerAdapter(Context context, List<Item> imagesList) {
+    public HomeImagesListRecyclerAdapter(Context context, List<MilkyWayImageModel> imagesList) {
         this.context = context;
         this.imagesList = imagesList;
     }
 
-    public void setImagesCollectionList(List<Item> imagesList){
+    public void setImagesCollectionList(List<MilkyWayImageModel> imagesList){
         this.imagesList = imagesList;
         notifyDataSetChanged();
     }
@@ -40,10 +41,10 @@ public class HomeImagesListRecyclerAdapter extends RecyclerView.Adapter<HomeImag
 
     @Override
     public void onBindViewHolder(@NonNull HomeImagesListItemViewHolder holder, int position) {
-        holder.binding.txtTitle.setText(imagesList.get(position).data.get(0).title);
+        holder.binding.txtTitle.setText(imagesList.get(position).title);
         holder.binding.txtCenterDate.setText("CCD  |  etrre");
         Glide.with(context)
-                .load(imagesList.get(position).links.get(0).href)
+                .load(imagesList.get(position).image)
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.binding.milkyWayImage);
 

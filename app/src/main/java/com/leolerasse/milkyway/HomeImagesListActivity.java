@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.leolerasse.milkyway.adapters.HomeImagesListRecyclerAdapter;
 import com.leolerasse.milkyway.databinding.ActivityHomeImagesListBinding;
+import com.leolerasse.milkyway.models.MilkyWayImageModel;
 import com.leolerasse.milkyway.network.models.Item;
 import com.leolerasse.milkyway.viewmodels.HomeImagesListViewModel;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class HomeImagesListActivity extends AppCompatActivity {
 
     private ActivityHomeImagesListBinding binding;
-    private List<Item> imagesList;
+    private List<MilkyWayImageModel> imagesList;
     private HomeImagesListRecyclerAdapter adapter;
     private HomeImagesListViewModel homeImagesListViewModel;
     @Override
@@ -38,18 +39,13 @@ public class HomeImagesListActivity extends AppCompatActivity {
         binding.recyclerImagesList.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerImagesList.setAdapter(adapter);
 
-        homeImagesListViewModel.getImagesCollectionListObserver().observe(this, new Observer<List<Item>>() {
-            @Override
-            public void onChanged(List<Item> items) {
-                if(items != null){
-                    imagesList  = items;
-                    adapter.setImagesCollectionList(items);
-                }else{
-                    Log.d("DaTA", "No Data");
-                }
-            }
+        homeImagesListViewModel.getImagesCollectionListObserver().observe(this, new Observer<List<MilkyWayImageModel>>() {
+                    @Override
+                    public void onChanged(List<MilkyWayImageModel> milkyWayImageModels) {
+                        imagesList  = milkyWayImageModels;
+                        adapter.setImagesCollectionList(milkyWayImageModels);
+                    }
         });
-
         homeImagesListViewModel.fetchImages();
 
     }

@@ -15,4 +15,30 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
+    
+    <style name="HomeImageListItemTitleTextStyle">
+        <item name="android:textSize">@dimen/font_size_xLarge</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:paddingStart">@dimen/padding_normal</item>
+        <item name="android:paddingEnd">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+    </style>
+
+    <style name="HomeImageListItemCenterDateTextStyle">
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingStart">@dimen/padding_normal</item>
+        <item name="android:paddingEnd">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
+    </style>
+
+    <style name="HomeImageListItemContainerStyle">
+        <item name="android:layout_marginStart">@dimen/font_size_large</item>
+        <item name="android:layout_marginEnd">@dimen/padding_large</item>
+        <item name="android:layout_marginTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+    </style>
 </resources>

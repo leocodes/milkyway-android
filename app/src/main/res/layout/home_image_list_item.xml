@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_image_list_item_height"
+    style="@style/HomeImageListItemContainerStyle"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/milkyWayImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/m_w_img_placeholder" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txtCenterDate"
+        style="@style/HomeImageListItemTitleTextStyle"
+        tools:text="Hubble Observes One-of-a-kind Star Nicknamed 'Nasty'"/>
+
+    <TextView
+        android:id="@+id/txtCenterDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="@style/HomeImageListItemCenterDateTextStyle"
+        tools:text="GSFC  |  2015-03-21"
+        />
+
+</RelativeLayout>

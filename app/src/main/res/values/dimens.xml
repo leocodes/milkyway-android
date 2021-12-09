@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Font Sizes-->
+    <dimen name="font_size_xLarge">26sp</dimen>
+    <dimen name="font_size_large">18sp</dimen>
+    <dimen name="font_size_small">16sp</dimen>
+
+    <!--Spacing: Padding/Margin/Height-->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+
+    <!--UI Height/Width-->
+    <dimen name="home_image_list_item_height">250dp</dimen>
+
+</resources>

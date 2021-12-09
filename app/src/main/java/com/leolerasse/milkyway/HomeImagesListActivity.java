@@ -1,14 +1,56 @@
 package com.leolerasse.milkyway;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import com.leolerasse.milkyway.adapters.HomeImagesListRecyclerAdapter;
+import com.leolerasse.milkyway.databinding.ActivityHomeImagesListBinding;
+import com.leolerasse.milkyway.network.models.Item;
+import com.leolerasse.milkyway.viewmodels.HomeImagesListViewModel;
+
+import java.util.List;
 
 public class HomeImagesListActivity extends AppCompatActivity {
 
+    private ActivityHomeImagesListBinding binding;
+    private List<Item> imagesList;
+    private HomeImagesListRecyclerAdapter adapter;
+    private HomeImagesListViewModel homeImagesListViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_images_list);
+        binding = ActivityHomeImagesListBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        initViews();
+    }
+
+    private void initViews(){
+        adapter = new HomeImagesListRecyclerAdapter(this, imagesList);
+        homeImagesListViewModel = new ViewModelProvider(this).get(HomeImagesListViewModel.class);
+
+        binding.recyclerImagesList.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerImagesList.setAdapter(adapter);
+
+        homeImagesListViewModel.getImagesCollectionListObserver().observe(this, new Observer<List<Item>>() {
+            @Override
+            public void onChanged(List<Item> items) {
+                if(items != null){
+                    imagesList  = items;
+                    adapter.setImagesCollectionList(items);
+                }else{
+                    Log.d("DaTA", "No Data");
+                }
+            }
+        });
+
+        homeImagesListViewModel.fetchImages();
+
     }
 }

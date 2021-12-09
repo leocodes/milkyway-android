@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Milkyway</string>
     <string name="the_milky_way">THE MILKY WAY</string>
+    <string name="home_list_item_center_date_placeholder"> %s  |  %s</string>
 </resources>

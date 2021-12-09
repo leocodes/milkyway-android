@@ -9,6 +9,7 @@ import com.leolerasse.milkyway.network.RetrofitClient;
 import com.leolerasse.milkyway.network.models.APIResponse;
 import com.leolerasse.milkyway.network.models.Item;
 import com.leolerasse.milkyway.utils.Constants;
+import com.leolerasse.milkyway.utils.DateUtils;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class HomeImagesListViewModel extends ViewModel {
                 Constants.YEAR_END).subscribeOn(Schedulers.io())
                 .toObservable()
                 .flatMapIterable(response -> response.collection.items)
-                .map(item -> new MilkyWayImageModel(item.data.get(0).center, item.data.get(0).title, item.data.get(0).description, item.data.get(0).dateCreated, item.links.get(0).href))
+                .map(item -> new MilkyWayImageModel(item.data.get(0).center, item.data.get(0).title, item.data.get(0).description, DateUtils.getFormattedDate(item.data.get(0).dateCreated), item.links.get(0).href))
                 .toList()
                 .subscribe(this::onSuccess, this::onFailure);
     }

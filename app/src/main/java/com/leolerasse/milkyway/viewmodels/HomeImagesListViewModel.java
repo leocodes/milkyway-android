@@ -1,31 +1,24 @@
 package com.leolerasse.milkyway.viewmodels;
 
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.leolerasse.milkyway.models.MilkyWayImageModel;
 import com.leolerasse.milkyway.network.IAPIService;
 import com.leolerasse.milkyway.network.RetrofitClient;
-import com.leolerasse.milkyway.network.models.APIResponse;
-import com.leolerasse.milkyway.network.models.Item;
 import com.leolerasse.milkyway.utils.Constants;
 import com.leolerasse.milkyway.utils.DateUtils;
 
 import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeImagesListViewModel extends ViewModel {
 
     private MutableLiveData<List<MilkyWayImageModel>> imagesList;
+    private Disposable disposable;
 
     public HomeImagesListViewModel() {
         imagesList = new MutableLiveData<>();
@@ -41,7 +34,8 @@ public class HomeImagesListViewModel extends ViewModel {
      */
     public void fetchImages(){
         IAPIService iapiService = RetrofitClient.getClient().create(IAPIService.class);
-        iapiService.getImages(
+
+        disposable = iapiService.getImages(
                 Constants.QUERY,
                 Constants.MEDIA_TYPE,
                 Constants.YEAR_START,
@@ -55,10 +49,12 @@ public class HomeImagesListViewModel extends ViewModel {
 
     private void onSuccess(List<MilkyWayImageModel> imagesModels) {
         imagesList.postValue(imagesModels);
+        disposable.dispose();//got the data. Clear resources
     }
 
     private void onFailure(Throwable t) {
         imagesList.postValue(null);
+        disposable.dispose();//got the data. Clear resources
     }
 
 }
